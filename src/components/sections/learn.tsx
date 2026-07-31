@@ -1,0 +1,119 @@
+"use client";
+
+import Image from "next/image";
+import { motion } from "framer-motion";
+import { Play } from "lucide-react";
+import { TiltCard } from "@/components/tilt-card";
+import {
+  SectionSubtitle,
+  SectionTitle,
+} from "@/components/sections/section-heading";
+import { fadeUp, staggerContainer } from "@/lib/animations";
+
+const CARDS = [
+  {
+    tag: "BUREAUTIQUE",
+    title: "Dominez vos outils, pas l'inverse.",
+    text: "De l'initiation à l'informatique jusqu'aux tableaux croisés dynamiques. Tout ce qu'il faut pour bâtir des fondations solides.",
+    image: "/img/Learn_image.svg",
+  },
+  {
+    tag: "MONTAGE VIDEO",
+    title: "Maîtrisez l'impact visuel et l'émotion.",
+    text: "Dominez DaVinci Resolve pour transformer vos rushs en récits cinématographiques. De l'étalonnage des couleurs au mixage sonore dynamique.",
+    image: "/img/Video_image.png",
+  },
+];
+
+export function Learn() {
+  return (
+    <section id="learn" className="flex min-h-screen flex-col items-center px-4 py-[clamp(36px,8vw,72px)] sm:px-6 lg:px-8">
+      <motion.div
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+      >
+        <SectionTitle>Forgez votre maîtrise</SectionTitle>
+      </motion.div>
+      <motion.div
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+      >
+        <SectionSubtitle>
+          Aorte Learn n&apos;enseigne pas seulement la tech, elle transmet l&apos;art de bâtir.
+        </SectionSubtitle>
+      </motion.div>
+
+      <motion.div
+        variants={staggerContainer()}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        className="mt-[clamp(24px,5vw,38px)] flex w-full max-w-[1000px] flex-wrap justify-center gap-6"
+      >
+        {CARDS.map((card) => (
+          <motion.div key={card.tag} variants={fadeUp} className="w-full max-w-[400px] flex-1">
+            <TiltCard className="flex h-full flex-col rounded-xl border border-border bg-card p-4 pb-6">
+              <div className="mb-4 flex h-[200px] w-full items-center justify-center">
+                <Image
+                  src={card.image}
+                  alt={card.tag}
+                  width={320}
+                  height={200}
+                  className="max-h-full w-auto object-contain"
+                />
+              </div>
+              <span className="mb-2 text-sm font-medium text-primary">
+                {card.tag}
+              </span>
+              <h3 className="text-silver mb-3 text-lg font-semibold leading-snug">
+                {card.title}
+              </h3>
+              <p className="flex-1 leading-relaxed text-muted-foreground">
+                {card.text}
+              </p>
+            </TiltCard>
+          </motion.div>
+        ))}
+
+        <motion.div variants={fadeUp} className="w-full max-w-[1000px]">
+          <TiltCard className="rounded-xl border border-border bg-card p-6">
+            <div className="flex flex-col items-center gap-6 lg:flex-row lg:gap-8">
+              <div className="flex-1 text-center lg:text-left">
+                <span className="mb-2 block text-sm font-medium text-primary">
+                  DESIGN GRAPHIQUE
+                </span>
+                <h3 className="text-silver mb-3 text-lg font-semibold leading-snug">
+                  Donnez vie à l&apos;image : de l&apos;intention à la création.
+                </h3>
+                <p className="leading-relaxed text-muted-foreground">
+                  Apprenez à structurer vos idées pour qu&apos;elles captent l&apos;oeil. Nous
+                  explorons l&apos;équilibre des formes et la force des couleurs.
+                </p>
+                <span className="mt-4 inline-block rounded-full border border-border bg-secondary px-4 py-1.5 text-xs text-muted-foreground">
+                  L&apos;ESTHETIQUE AU SERVICE DE L&apos;IMPACT.
+                </span>
+              </div>
+              <div className="relative flex w-full max-w-[420px] flex-1 items-center justify-center">
+                <Image
+                  src="/img/Group 2028.png"
+                  alt="Design graphique"
+                  width={420}
+                  height={260}
+                  className="h-auto w-full object-contain"
+                />
+                <div className="absolute flex items-center gap-2 rounded-lg bg-background/80 px-4 py-2 text-sm font-medium backdrop-blur-sm">
+                  <Play className="size-3.5" />
+                  Commencer à créer
+                </div>
+              </div>
+            </div>
+          </TiltCard>
+        </motion.div>
+      </motion.div>
+    </section>
+  );
+}
