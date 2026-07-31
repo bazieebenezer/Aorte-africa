@@ -51,7 +51,7 @@ export function Solves() {
               <div className="mb-4 flex size-12 items-center justify-center rounded-lg border border-primary/30 bg-primary/5 transition-all duration-300 group-hover:bg-primary/15 group-hover:scale-110">
                 <service.icon className="size-6 text-primary" />
               </div>
-              <h3 className="text-silver mb-4 text-2xl font-semibold leading-snug">
+              <h3 className="text-silver fs-card-title mb-4 font-semibold leading-snug">
                 {service.title}
               </h3>
               <p className="leading-relaxed text-muted-foreground">

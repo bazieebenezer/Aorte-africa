@@ -29,7 +29,7 @@ export function Market() {
         <div className="grid grid-cols-1 overflow-hidden rounded-xl border border-border bg-card transition-colors duration-300 hover:border-border-hover md:grid-cols-2">
           <div className="flex flex-col justify-center p-[clamp(24px,5vw,48px)]">
             <SectionTag>CYCLE DURABLE</SectionTag>
-            <h3 className="text-silver mt-4 text-2xl font-semibold leading-snug">
+            <h3 className="text-silver fs-card-title mt-4 font-semibold leading-snug">
               Adoptez l&apos;excellence reconditionnée.
             </h3>
             <p className="mt-3 leading-relaxed text-muted-foreground">

@@ -37,7 +37,7 @@ export function Dream() {
       </Reveal>
 
       <Reveal direction="up" delay={0.1} className="mt-4">
-        <SectionTitle className="text-[clamp(2.5rem,6vw,4rem)]">
+        <SectionTitle className="fs-display">
           Bâtir l&apos;héritage <br />
           numérique
         </SectionTitle>

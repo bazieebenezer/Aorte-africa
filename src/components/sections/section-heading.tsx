@@ -16,7 +16,7 @@ export function SectionTitle({
   className?: string;
 }) {
   return (
-    <h2 className={cn("text-silver text-center text-[clamp(1.8rem,4vw,2.6rem)] font-semibold leading-snug", className)}>
+    <h2 className={cn("text-silver fs-title text-center font-semibold leading-snug", className)}>
       {children}
     </h2>
   );
@@ -24,6 +24,6 @@ export function SectionTitle({
 
 export function SectionSubtitle({ children }: { children: React.ReactNode }) {
   return (
-    <p className="mt-2 max-w-2xl text-center text-muted-foreground">{children}</p>
+    <p className="fs-subtitle mt-2 max-w-2xl text-center text-muted-foreground">{children}</p>
   );
 }

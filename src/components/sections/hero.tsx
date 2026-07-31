@@ -51,7 +51,7 @@ export function Hero() {
           <span>BATI SUR LA PASSION</span>
         </motion.div>
 
-        <h1 className="flex flex-col items-center gap-1 text-center text-[clamp(2.75rem,9vw,5.5rem)] font-semibold leading-[1.05] sm:gap-2">
+        <h1 className="fs-hero flex flex-col items-center gap-1 text-center font-semibold leading-[1.05] sm:gap-2">
           {TITLE_WORDS.map((word, i) => (
             <span key={word} className="flex overflow-hidden pb-1">
               <motion.span
@@ -74,7 +74,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.85, ease: "backOut" }}
-          className="mb-6 mt-6 max-w-[600px] text-center text-base leading-relaxed text-muted-foreground sm:text-lg"
+          className="fs-body-lg mb-6 mt-6 max-w-[600px] text-center leading-relaxed text-muted-foreground"
         >
           Nous ne créons pas seulement des outils, nous forgeons l&apos;infrastructure
           numérique d&apos;une nouvelle génération.

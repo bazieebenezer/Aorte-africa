@@ -1,5 +1,5 @@
 import { spawn } from "node:child_process";
-import { mkdirSync } from "node:fs";
+import { mkdirSync, rmSync } from "node:fs";
 
 const CHROME = process.env.CHROME || "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe";
 const PORT = 9333;
@@ -14,24 +14,31 @@ const viewports = [
 const paths = ["/", "/blog"];
 
 mkdirSync(OUT, { recursive: true });
+rmSync(`${OUT}\\chrome-profile`, { recursive: true, force: true });
 
 const chrome = spawn(
   CHROME,
   [
     "--headless=new",
     `--remote-debugging-port=${PORT}`,
+    `--user-data-dir=${OUT}\\chrome-profile`,
     "--no-first-run",
     "--disable-gpu",
     "--no-sandbox",
     "about:blank",
   ],
-  { stdio: "ignore" }
+  { stdio: ["ignore", "ignore", "pipe"] }
 );
+
+chrome.stderr.on("data", (d) => {
+  const line = String(d).trim();
+  if (line.includes("DevTools listening") || line.includes("ERROR")) console.error("[chrome]", line);
+});
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 async function getPageWs() {
-  for (let i = 0; i < 40; i++) {
+  for (let i = 0; i < 200; i++) {
     try {
       const list = await fetch(`http://127.0.0.1:${PORT}/json/list`).then((r) => r.json());
       const page = list.find((t) => t.type === "page");
@@ -68,8 +75,20 @@ await send("Page.enable");
 const measure = `(() => {
   const vw = document.documentElement.clientWidth;
   const vh = document.documentElement.clientHeight;
+  const scrollW = document.documentElement.scrollWidth;
   const offenders = [];
   for (const el of document.querySelectorAll("*")) {
+    let hidden = false;
+    let node = el;
+    while (node && node !== document.documentElement) {
+      const cs = getComputedStyle(node);
+      if (parseFloat(cs.opacity) < 0.1 || cs.visibility === "hidden") {
+        hidden = true;
+        break;
+      }
+      node = node.parentElement;
+    }
+    if (hidden) continue;
     const r = el.getBoundingClientRect();
     if (r.right > vw + 1 || r.left < -1) {
       offenders.push({
@@ -81,7 +100,7 @@ const measure = `(() => {
       });
     }
   }
-  return JSON.stringify({ vw, vh, offenders: offenders.slice(0, 25), total: offenders.length });
+  return JSON.stringify({ vw, vh, scrollW, offenders: offenders.slice(0, 25), total: offenders.length });
 })()`;
 
 for (const { w, h, name } of viewports) {
@@ -93,11 +112,12 @@ for (const { w, h, name } of viewports) {
   });
   for (const p of paths) {
     await send("Page.navigate", { url: BASE + p });
-    await sleep(3000);
+    await sleep(4200);
     const res = await send("Runtime.evaluate", { expression: measure, returnByValue: true });
     const data = JSON.parse(res.result.result.value);
     const status = data.total === 0 ? "OK" : `OVERFLOW x${data.total}`;
-    console.log(`[${name}] ${p} vw=${data.vw} -> ${status}`);
+    const hScroll = data.scrollW > data.vw ? "HSCROLL!" : "no-hscroll";
+    console.log(`[${name}] ${p} vw=${data.vw} scrollW=${data.scrollW} ${hScroll} -> ${status}`);
     for (const o of data.offenders.slice(0, 12)) {
       console.log(`    - <${o.tag}> ${o.cls || "(no class)"} [${o.left}, ${o.right}] w=${o.width}`);
     }
@@ -126,6 +146,26 @@ for (const { w, h, name } of viewports) {
         console.log(`    - <${o.tag}> ${o.cls || "(no class)"} [${o.left}, ${o.right}] w=${o.width}`);
       }
     }
+  }
+}
+
+await send("Page.setJavaScriptEnabled", { enabled: false });
+await send("Emulation.setDeviceMetricsOverride", {
+  width: 390,
+  height: 844,
+  deviceScaleFactor: 1,
+  mobile: true,
+});
+for (const p of ["/", "/blog"]) {
+  await send("Page.navigate", { url: BASE + p });
+  await sleep(3500);
+  const res = await send("Runtime.evaluate", { expression: measure, returnByValue: true });
+  const data = JSON.parse(res.result.result.value);
+  const status = data.total === 0 ? "OK" : `OVERFLOW x${data.total}`;
+  const hScroll = data.scrollW > data.vw ? "HSCROLL!" : "no-hscroll";
+  console.log(`[no-js 390] ${p} vw=${data.vw} scrollW=${data.scrollW} ${hScroll} -> ${status}`);
+  for (const o of data.offenders.slice(0, 12)) {
+    console.log(`    - <${o.tag}> ${o.cls || "(no class)"} [${o.left}, ${o.right}] w=${o.width}`);
   }
 }
 

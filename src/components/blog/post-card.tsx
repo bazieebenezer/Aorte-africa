@@ -48,7 +48,7 @@ export function PostCard({ post, featured = false }: { post: Post; featured?: bo
             </time>
           </div>
 
-          <h3 className="text-silver text-lg font-semibold leading-snug">
+          <h3 className="text-silver fs-card-title font-semibold leading-snug">
             {post.title}
           </h3>
           <p className="leading-relaxed text-muted-foreground">{post.excerpt}</p>

@@ -71,7 +71,7 @@ export default async function ArticlePage({ params }: Props) {
             {post.readingTime} min de lecture
           </span>
         </div>
-        <h1 className="text-[clamp(2rem,4vw,3rem)] font-bold leading-tight tracking-tight">
+        <h1 className="fs-article-title font-bold leading-tight tracking-tight">
           {post.title}
         </h1>
       </header>

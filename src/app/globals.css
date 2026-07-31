@@ -83,6 +83,38 @@
   animation: silver-shine 4s ease-in-out infinite;
 }
 
+@utility fs-hero {
+  font-size: clamp(2.5rem, 9vw, 5.5rem);
+}
+
+@utility fs-display {
+  font-size: clamp(2.25rem, 5.5vw, 4rem);
+}
+
+@utility fs-title {
+  font-size: clamp(1.7rem, 3.2vw, 2.75rem);
+}
+
+@utility fs-card-title {
+  font-size: clamp(1.25rem, 1.5vw, 1.5rem);
+}
+
+@utility fs-article-title {
+  font-size: clamp(1.9rem, 4.5vw, 3.25rem);
+}
+
+@utility fs-subtitle {
+  font-size: clamp(1rem, 1.2vw, 1.25rem);
+}
+
+@utility fs-body-lg {
+  font-size: clamp(1rem, 0.8vw, 1.125rem);
+}
+
+@utility fs-body {
+  font-size: clamp(0.9375rem, 0.9rem + 0.25vw, 1rem);
+}
+
 @utility scrollbar-hidden {
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -136,11 +168,13 @@
 
   html {
     scroll-behavior: smooth;
+    overflow-x: clip;
   }
 
   body {
     @apply bg-background text-foreground scrollbar-hidden overflow-x-hidden;
     font-family: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    font-size: clamp(15.5px, 15.5px + 0.15vw, 16px);
   }
 
   h1,

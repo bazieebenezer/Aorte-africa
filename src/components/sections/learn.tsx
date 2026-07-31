@@ -57,7 +57,7 @@ export function Learn() {
               <span className="mb-2 text-sm font-medium text-primary">
                 {card.tag}
               </span>
-              <h3 className="text-silver mb-3 text-lg font-semibold leading-snug">
+              <h3 className="text-silver fs-card-title mb-3 font-semibold leading-snug">
                 {card.title}
               </h3>
               <p className="flex-1 leading-relaxed text-muted-foreground">
@@ -75,7 +75,7 @@ export function Learn() {
               <span className="mb-2 block text-sm font-medium text-primary">
                 DESIGN GRAPHIQUE
               </span>
-              <h3 className="text-silver mb-3 text-lg font-semibold leading-snug">
+              <h3 className="text-silver fs-card-title mb-3 font-semibold leading-snug">
                 Donnez vie à l&apos;image : de l&apos;intention à la création.
               </h3>
               <p className="leading-relaxed text-muted-foreground">

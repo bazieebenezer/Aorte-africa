@@ -31,10 +31,10 @@ export default async function BlogPage() {
         <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/15 bg-primary/10 px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[2.5px] text-primary">
           Blog
         </span>
-        <h1 className="text-silver text-[clamp(2.8rem,5vw,4rem)] font-bold tracking-tight">
+        <h1 className="text-silver fs-display font-bold tracking-tight">
           Le Journal
         </h1>
-        <p className="mx-auto mt-5 max-w-[480px] text-lg leading-relaxed text-muted-foreground">
+        <p className="fs-body-lg mx-auto mt-5 max-w-[480px] leading-relaxed text-muted-foreground">
           Exploration, innovation et vision.
         </p>
       </header>
