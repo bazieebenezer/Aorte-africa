@@ -5,6 +5,7 @@ import { SiteHeader } from "@/components/site-header";
 import { Footer } from "@/components/footer";
 import { ProgressBar } from "@/components/progress-bar";
 import { BackToTop } from "@/components/back-to-top";
+import { Cursor } from "@/components/cursor";
 import { Toaster } from "@/components/ui/sonner";
 
 const inter = Inter({
@@ -38,6 +39,7 @@ export default function RootLayout({
         <main className="flex flex-1 flex-col">{children}</main>
         <Footer />
         <BackToTop />
+        <Cursor />
         <Toaster position="bottom-right" />
       </body>
     </html>

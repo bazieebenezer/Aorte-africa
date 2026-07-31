@@ -1,27 +1,46 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { BadgeCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Magnetic } from "@/components/magnetic";
 
+const TITLE_WORDS = ["Graduatim,", "Potens."];
+
 export function Hero() {
+  const ref = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"],
+  });
+
+  const gridY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  const glowScale = useTransform(scrollYProgress, [0, 1], [1, 1.6]);
+  const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "-40%"]);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
+
   return (
     <section
       id="home"
+      ref={ref}
       className="relative flex min-h-screen flex-col overflow-hidden"
-      style={{
-        backgroundImage: "url(/img/grid.svg)",
-        backgroundSize: "contain",
-        backgroundRepeat: "repeat",
-      }}
     >
-      <div
+      <motion.div
         aria-hidden
+        style={{ y: gridY, backgroundImage: "url(/img/grid.svg)", backgroundSize: "contain", backgroundRepeat: "repeat" }}
+        className="absolute inset-0 z-0"
+      />
+      <motion.div
+        aria-hidden
+        style={{ scale: glowScale }}
         className="pointer-events-none absolute left-1/2 top-1/2 z-0 size-[clamp(300px,50vw,700px)] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/10 blur-[clamp(120px,20vw,300px)]"
       />
 
-      <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-4 pb-16 pt-32">
+      <motion.div
+        style={{ y: contentY, opacity: contentOpacity }}
+        className="relative z-10 flex flex-1 flex-col items-center justify-center px-4 pb-16 pt-32"
+      >
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
@@ -32,20 +51,30 @@ export function Hero() {
           <span>BATI SUR LA PASSION</span>
         </motion.div>
 
-        <motion.h1
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.35, ease: "backOut" }}
-          className="text-silver text-center text-[clamp(2.5rem,6vw,4rem)] font-semibold"
-        >
-          Graduatim, Potens.
-        </motion.h1>
+        <h1 className="flex flex-col items-center gap-1 text-center text-[clamp(2.75rem,9vw,5.5rem)] font-semibold leading-[1.05] sm:gap-2">
+          {TITLE_WORDS.map((word, i) => (
+            <span key={word} className="flex overflow-hidden pb-1">
+              <motion.span
+                initial={{ y: "110%", rotateX: 45, opacity: 0 }}
+                animate={{ y: 0, rotateX: 0, opacity: 1 }}
+                transition={{
+                  duration: 1.1,
+                  delay: 0.35 + i * 0.18,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                className="text-silver"
+              >
+                {word}
+              </motion.span>
+            </span>
+          ))}
+        </h1>
 
         <motion.p
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.5, ease: "backOut" }}
-          className="mb-6 mt-6 max-w-[600px] text-center leading-relaxed text-muted-foreground"
+          transition={{ duration: 1, delay: 0.85, ease: "backOut" }}
+          className="mb-6 mt-6 max-w-[600px] text-center text-base leading-relaxed text-muted-foreground sm:text-lg"
         >
           Nous ne créons pas seulement des outils, nous forgeons l&apos;infrastructure
           numérique d&apos;une nouvelle génération.
@@ -54,7 +83,7 @@ export function Hero() {
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.65, ease: "backOut" }}
+          transition={{ duration: 1, delay: 1, ease: "backOut" }}
         >
           <Magnetic>
             <Button asChild size="lg" className="font-semibold">
@@ -66,10 +95,10 @@ export function Hero() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 0.8 }}
+          transition={{ duration: 1, delay: 1.2 }}
           className="mt-[clamp(40px,8vw,86px)] h-[clamp(80px,15vw,160px)] w-px bg-gradient-to-b from-transparent via-foreground/45 to-transparent"
         />
-      </div>
+      </motion.div>
     </section>
   );
 }

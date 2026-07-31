@@ -1,15 +1,17 @@
 "use client";
 
+import { Reveal } from "@/components/motion/reveal";
+import { Stagger, staggerChild } from "@/components/motion/stagger";
 import { motion } from "framer-motion";
 import { TiltCard } from "@/components/tilt-card";
 import {
   SectionTag,
   SectionTitle,
 } from "@/components/sections/section-heading";
-import { fadeUp, staggerContainer } from "@/lib/animations";
 
 const BOXES = [
   {
+    index: "01",
     title: "FONDATION",
     subtitle: "L'architecture d'un empire",
     text: (
@@ -22,6 +24,7 @@ const BOXES = [
     ),
   },
   {
+    index: "02",
     title: "FLUX VITAL",
     subtitle: "Une synergie indestructible",
     text: (
@@ -34,6 +37,7 @@ const BOXES = [
     ),
   },
   {
+    index: "03",
     title: "PHILOSOPHIE",
     subtitle: "La valeur comme seul horizon",
     text: (
@@ -46,6 +50,7 @@ const BOXES = [
     ),
   },
   {
+    index: "04",
     title: "EXPANSION",
     subtitle: "L'horizon de la domination",
     text: (
@@ -61,49 +66,40 @@ const BOXES = [
 export function Presentation() {
   return (
     <section id="presentation" className="flex min-h-screen flex-col items-center px-4 py-[clamp(36px,8vw,72px)] sm:px-6 lg:px-8">
-      <motion.div
-        variants={fadeUp}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-      >
+      <Reveal direction="down">
         <SectionTag>L&apos;entité Aorte</SectionTag>
-      </motion.div>
+      </Reveal>
 
-      <motion.div
-        variants={fadeUp}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-        className="mt-6"
-      >
+      <Reveal direction="up" delay={0.1} className="mt-6">
         <SectionTitle>
           Le coeur battant de votre{" "}
           <span className="text-muted-foreground">écosystème numérique.</span>
         </SectionTitle>
-      </motion.div>
+      </Reveal>
 
-      <motion.div
-        variants={staggerContainer()}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
+      <Stagger
+        stagger={0.12}
         className="mt-[clamp(40px,8vw,76px)] grid w-full max-w-[1000px] grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 lg:gap-8"
       >
         {BOXES.map((box) => (
-          <motion.div key={box.title} variants={fadeUp} className="min-w-0">
-            <TiltCard className="h-full">
-              <div className="mb-3 border-l-4 border-primary bg-gradient-to-r from-primary/5 to-transparent px-3 py-2">
-                <h3 className="text-silver text-sm font-semibold tracking-wide">
-                  {box.title}
-                </h3>
-                <h4 className="text-sm text-muted-foreground">{box.subtitle}</h4>
+          <motion.div key={box.title} variants={staggerChild} className="min-w-0">
+            <TiltCard className="group h-full">
+              <div className="mb-3 flex items-center gap-3 border-l-4 border-primary bg-gradient-to-r from-primary/5 to-transparent px-3 py-2 transition-colors duration-300 group-hover:from-primary/10">
+                <span className="text-xs font-semibold text-primary/70">
+                  {box.index}
+                </span>
+                <div>
+                  <h3 className="text-silver text-sm font-semibold tracking-wide">
+                    {box.title}
+                  </h3>
+                  <h4 className="text-sm text-muted-foreground">{box.subtitle}</h4>
+                </div>
               </div>
               <p className="leading-relaxed text-muted-foreground">{box.text}</p>
             </TiltCard>
           </motion.div>
         ))}
-      </motion.div>
+      </Stagger>
     </section>
   );
 }

@@ -7,12 +7,7 @@ import { cn } from "@/lib/utils";
 
 export function PostCard({ post, featured = false }: { post: Post; featured?: boolean }) {
   return (
-    <article
-      className={cn(
-        "group overflow-hidden rounded-xl border border-border bg-card transition-colors hover:border-border-hover",
-        featured && "md:col-span-2"
-      )}
-    >
+    <article className="group overflow-hidden rounded-xl border border-border bg-card transition-colors hover:border-border-hover">
       <Link
         href={`/blog/${post.slug}`}
         className={cn("flex h-full flex-col", featured && "md:flex-row")}

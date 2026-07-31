@@ -1,24 +1,31 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { ArrowUpRight, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 const NAV_LINKS = [
-  { label: "Accueil", href: "/#home" },
-  { label: "Formation", href: "/#learn" },
-  { label: "Solutions", href: "/#solves" },
-  { label: "Boutique", href: "/#market" },
-  { label: "Vision", href: "/#dream" },
-  { label: "Blog", href: "/blog" },
+  { label: "Accueil", href: "/#home", index: "01" },
+  { label: "Formation", href: "/#learn", index: "02" },
+  { label: "Solutions", href: "/#solves", index: "03" },
+  { label: "Boutique", href: "/#market", index: "04" },
+  { label: "Vision", href: "/#dream", index: "05" },
+  { label: "Blog", href: "/blog", index: "06" },
 ];
 
 export function Navbar({ onContact }: { onContact: () => void }) {
   const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
 
   const close = () => setOpen(false);
 
@@ -27,10 +34,17 @@ export function Navbar({ onContact }: { onContact: () => void }) {
       initial={{ y: -30, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 1, ease: "easeOut" }}
-      className="fixed inset-x-0 top-0 z-50 border-b border-border/60 bg-background/60 backdrop-blur-xl"
+      className="fixed inset-x-0 top-0 z-50"
     >
-      <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
-        <Link href="/#home" className="flex items-center" onClick={close}>
+      <nav
+        className={cn(
+          "mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 transition-colors duration-300 sm:px-6 lg:px-8",
+          open
+            ? "bg-transparent"
+            : "border-b border-border/60 bg-background/60 backdrop-blur-xl"
+        )}
+      >
+        <Link href="/#home" className="relative z-[70] flex items-center" onClick={close}>
           <Image
             src="/img/logo.svg"
             alt="Aorte logo"
@@ -46,9 +60,10 @@ export function Navbar({ onContact }: { onContact: () => void }) {
             <li key={link.href}>
               <Link
                 href={link.href}
-                className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+                className="group relative text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
               >
                 {link.label}
+                <span className="absolute -bottom-1 left-0 h-px w-0 bg-primary transition-all duration-300 group-hover:w-full" />
               </Link>
             </li>
           ))}
@@ -62,8 +77,13 @@ export function Navbar({ onContact }: { onContact: () => void }) {
 
         <button
           onClick={() => setOpen(!open)}
-          aria-label="Menu"
-          className="flex size-10 items-center justify-center rounded-md border border-border text-muted-foreground transition-colors hover:text-foreground lg:hidden"
+          aria-label={open ? "Fermer le menu" : "Ouvrir le menu"}
+          className={cn(
+            "relative z-[70] flex size-10 items-center justify-center rounded-md border transition-colors lg:hidden",
+            open
+              ? "border-primary/60 bg-primary/10 text-primary"
+              : "border-border text-muted-foreground hover:text-foreground"
+          )}
         >
           {open ? <X className="size-5" /> : <Menu className="size-5" />}
         </button>
@@ -72,35 +92,81 @@ export function Navbar({ onContact }: { onContact: () => void }) {
       <AnimatePresence>
         {open && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
-            className={cn(
-              "absolute inset-x-4 top-[72px] mx-auto max-w-md",
-              "rounded-lg border border-border bg-background/80 p-6 backdrop-blur-2xl",
-              "flex flex-col items-center gap-6 lg:hidden"
-            )}
+            initial={{ opacity: 0, clipPath: "circle(0% at calc(100% - 48px) 48px)" }}
+            animate={{ opacity: 1, clipPath: "circle(150% at calc(100% - 48px) 48px)" }}
+            exit={{ opacity: 0, clipPath: "circle(0% at calc(100% - 48px) 48px)" }}
+            transition={{ duration: 0.7, ease: [0.4, 0, 0.2, 1] }}
+            className="fixed inset-0 z-[60] flex flex-col overflow-hidden bg-background/95 backdrop-blur-2xl lg:hidden"
+            style={{
+              backgroundImage: "url(/img/grid.svg)",
+              backgroundSize: "contain",
+              backgroundRepeat: "repeat",
+            }}
           >
-            {NAV_LINKS.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={close}
-                className="text-sm font-medium text-foreground"
+            <div
+              aria-hidden
+              className="pointer-events-none absolute -top-24 left-1/2 size-[clamp(300px,60vw,500px)] -translate-x-1/2 rounded-full bg-primary/10 blur-[120px]"
+            />
+
+            <nav className="relative z-10 flex flex-1 flex-col items-center justify-center gap-1 px-6">
+              {NAV_LINKS.map((link, i) => (
+                <motion.div
+                  key={link.href}
+                  initial={{ opacity: 0, y: 60, filter: "blur(8px)" }}
+                  animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                  exit={{ opacity: 0, y: 40, filter: "blur(8px)" }}
+                  transition={{
+                    duration: 0.6,
+                    delay: 0.15 + i * 0.08,
+                    ease: "backOut",
+                  }}
+                  className="w-full max-w-md"
+                >
+                  <Link
+                    href={link.href}
+                    onClick={close}
+                    className="group flex items-baseline gap-4 py-2 sm:py-3"
+                  >
+                    <span className="w-8 shrink-0 text-right text-xs font-medium text-primary">
+                      {link.index}
+                    </span>
+                    <span className="flex items-center gap-3 text-[clamp(2rem,9vw,3rem)] font-semibold tracking-tight transition-transform duration-300 group-hover:translate-x-3">
+                      <span className="text-silver">{link.label}</span>
+                      <ArrowUpRight className="size-6 opacity-0 transition-all duration-300 group-hover:opacity-100 sm:size-8" />
+                    </span>
+                  </Link>
+                </motion.div>
+              ))}
+
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 20 }}
+                transition={{ duration: 0.5, delay: 0.7, ease: "backOut" }}
+                className="mt-10 w-full max-w-md"
               >
-                {link.label}
-              </Link>
-            ))}
-            <Button
-              onClick={() => {
-                close();
-                onContact();
-              }}
-              className="w-full"
+                <Button
+                  onClick={() => {
+                    close();
+                    onContact();
+                  }}
+                  size="lg"
+                  className="w-full font-semibold"
+                >
+                  Contact
+                </Button>
+              </motion.div>
+            </nav>
+
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.5, delay: 0.9 }}
+              className="relative z-10 pb-10 text-center text-xs text-muted-foreground"
             >
-              Contact
-            </Button>
+              Graduatim, Potens. — Aorte
+            </motion.p>
           </motion.div>
         )}
       </AnimatePresence>

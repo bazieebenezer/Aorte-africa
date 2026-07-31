@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { PostCard } from "@/components/blog/post-card";
+import { Stagger, staggerChild } from "@/components/motion/stagger";
+import { motion } from "framer-motion";
 import type { Post } from "@/lib/blog-data";
 import { cn } from "@/lib/utils";
 
@@ -16,11 +18,17 @@ export function PostsGrid({ posts }: { posts: Post[] }) {
 
   return (
     <>
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+      <Stagger className="grid grid-cols-1 gap-6 md:grid-cols-2">
         {visible.map((post, i) => (
-          <PostCard key={post.slug} post={post} featured={i === 0 && page === 1} />
+          <motion.div
+            key={post.slug}
+            variants={staggerChild}
+            className={cn("min-w-0", i === 0 && page === 1 && "md:col-span-2")}
+          >
+            <PostCard post={post} featured={i === 0 && page === 1} />
+          </motion.div>
         ))}
-      </div>
+      </Stagger>
 
       {totalPages > 1 && (
         <nav className="mt-14 flex items-center justify-center gap-2">

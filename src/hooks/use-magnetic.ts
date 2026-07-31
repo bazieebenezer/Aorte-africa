@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import { useMotionValue, useSpring } from "framer-motion";
 
-export function useMagnetic<T extends HTMLElement>(strength = 0.4) {
+export function useMagnetic<T extends HTMLElement>(strength = 0.45) {
   const ref = useRef<T>(null);
   const x = useMotionValue(0);
   const y = useMotionValue(0);

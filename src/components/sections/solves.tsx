@@ -1,5 +1,7 @@
 "use client";
 
+import { Reveal } from "@/components/motion/reveal";
+import { Stagger, staggerChild } from "@/components/motion/stagger";
 import { motion } from "framer-motion";
 import { Globe, PenTool, Clapperboard } from "lucide-react";
 import { TiltCard } from "@/components/tilt-card";
@@ -7,7 +9,6 @@ import {
   SectionSubtitle,
   SectionTitle,
 } from "@/components/sections/section-heading";
-import { fadeUp, staggerContainer } from "@/lib/animations";
 
 const SERVICES = [
   {
@@ -30,37 +31,26 @@ const SERVICES = [
 export function Solves() {
   return (
     <section id="solves" className="flex flex-col items-center px-4 py-[clamp(36px,8vw,72px)] sm:px-6 lg:px-8">
-      <motion.div
-        variants={fadeUp}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-      >
+      <Reveal direction="up">
         <SectionTitle>Forgez votre infrastructure</SectionTitle>
-      </motion.div>
-      <motion.div
-        variants={fadeUp}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-      >
+      </Reveal>
+      <Reveal direction="up" delay={0.1}>
         <SectionSubtitle>
           Aorte Systems ne livre pas seulement du service, elle développe
           l&apos;armature logique de votre succès.
         </SectionSubtitle>
-      </motion.div>
+      </Reveal>
 
-      <motion.div
-        variants={staggerContainer()}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-        className="mt-[clamp(40px,8vw,67px)] grid w-full max-w-[1100px] grid-cols-1 gap-4 md:grid-cols-3 md:gap-6"
+      <Stagger
+        stagger={0.15}
+        className="mt-[clamp(40px,8vw,67px)] grid w-full max-w-[1100px] grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 md:gap-6"
       >
         {SERVICES.map((service) => (
-          <motion.div key={service.title} variants={fadeUp} className="min-w-0">
-            <TiltCard className="h-full rounded-xl bg-gradient-to-br from-secondary to-background p-6">
-              <service.icon className="mb-4 size-8 text-primary" />
+          <motion.div key={service.title} variants={staggerChild} className="min-w-0">
+            <TiltCard className="group h-full rounded-xl bg-gradient-to-br from-secondary to-background p-6 transition-colors duration-300 hover:border-border-hover">
+              <div className="mb-4 flex size-12 items-center justify-center rounded-lg border border-primary/30 bg-primary/5 transition-all duration-300 group-hover:bg-primary/15 group-hover:scale-110">
+                <service.icon className="size-6 text-primary" />
+              </div>
               <h3 className="text-silver mb-4 text-2xl font-semibold leading-snug">
                 {service.title}
               </h3>
@@ -70,7 +60,7 @@ export function Solves() {
             </TiltCard>
           </motion.div>
         ))}
-      </motion.div>
+      </Stagger>
     </section>
   );
 }

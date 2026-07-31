@@ -94,6 +94,41 @@
   }
 }
 
+@media (pointer: fine) {
+  body.cursor-hidden,
+  body.cursor-hidden * {
+    cursor: none !important;
+  }
+}
+
+@layer components {
+  .btn-shine {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  .btn-shine::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(
+      110deg,
+      transparent 20%,
+      rgba(255, 255, 255, 0.35) 50%,
+      transparent 80%
+    );
+    transform: translateX(-120%) skewX(-15deg);
+    transition: transform 0.7s ease;
+    pointer-events: none;
+  }
+
+  .btn-shine:hover::before {
+    transform: translateX(120%) skewX(-15deg);
+  }
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
