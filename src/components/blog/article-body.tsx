@@ -18,8 +18,14 @@ const components: PortableTextComponents = {
       </h3>
     ),
     blockquote: ({ children }) => (
-      <blockquote className="fs-body-lg my-10 rounded-r-lg border-l-[3px] border-primary bg-card py-5 pl-6 pr-6 italic leading-relaxed text-foreground">
-        {children}
+      <blockquote className="relative my-10 border-l border-border pl-6 text-foreground">
+        <span
+          aria-hidden
+          className="absolute -top-7 -left-1 font-serif text-6xl leading-none text-primary/25"
+        >
+          «
+        </span>
+        <p className="fs-body-lg font-medium leading-relaxed">{children}</p>
       </blockquote>
     ),
   },
