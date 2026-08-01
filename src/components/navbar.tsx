@@ -9,12 +9,12 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 const NAV_LINKS = [
-  { label: "Accueil", href: "/#home", index: "01" },
-  { label: "Formation", href: "/#learn", index: "02" },
-  { label: "Solutions", href: "/#solves", index: "03" },
-  { label: "Boutique", href: "/#market", index: "04" },
-  { label: "Vision", href: "/#dream", index: "05" },
-  { label: "Blog", href: "/blog", index: "06" },
+  { label: "Accueil", href: "/#home" },
+  { label: "Formation", href: "/#learn" },
+  { label: "Solutions", href: "/#solves" },
+  { label: "Boutique", href: "/#market" },
+  { label: "Vision", href: "/#dream" },
+  { label: "Blog", href: "/blog" },
 ];
 
 export function Navbar({ onContact }: { onContact: () => void }) {
@@ -125,11 +125,8 @@ export function Navbar({ onContact }: { onContact: () => void }) {
                   <Link
                     href={link.href}
                     onClick={close}
-                    className="group flex items-baseline gap-4 py-2 sm:py-3"
+                    className="group flex items-center gap-4 py-2 sm:py-3"
                   >
-                    <span className="w-8 shrink-0 text-right text-xs font-medium text-primary">
-                      {link.index}
-                    </span>
                     <span className="flex items-center gap-3 text-[clamp(2rem,9vw,3rem)] font-semibold tracking-tight transition-transform duration-300 group-hover:translate-x-3">
                       <span className="text-silver">{link.label}</span>
                       <ArrowUpRight className="size-6 opacity-0 transition-all duration-300 group-hover:opacity-100 sm:size-8" />

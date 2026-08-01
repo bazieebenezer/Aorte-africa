@@ -11,7 +11,6 @@ import {
 
 const BOXES = [
   {
-    index: "01",
     title: "FONDATION",
     subtitle: "L'architecture d'un empire",
     text: (
@@ -24,7 +23,6 @@ const BOXES = [
     ),
   },
   {
-    index: "02",
     title: "FLUX VITAL",
     subtitle: "Une synergie indestructible",
     text: (
@@ -37,7 +35,6 @@ const BOXES = [
     ),
   },
   {
-    index: "03",
     title: "PHILOSOPHIE",
     subtitle: "La valeur comme seul horizon",
     text: (
@@ -50,7 +47,6 @@ const BOXES = [
     ),
   },
   {
-    index: "04",
     title: "EXPANSION",
     subtitle: "L'horizon de la domination",
     text: (
@@ -85,9 +81,6 @@ export function Presentation() {
           <motion.div key={box.title} variants={staggerChild} className="min-w-0">
             <TiltCard className="group h-full">
               <div className="mb-3 flex items-center gap-3 border-l-4 border-primary bg-gradient-to-r from-primary/5 to-transparent px-3 py-2 transition-colors duration-300 group-hover:from-primary/10">
-                <span className="text-xs font-semibold text-primary/70">
-                  {box.index}
-                </span>
                 <div>
                   <h3 className="text-silver text-sm font-semibold tracking-wide">
                     {box.title}
