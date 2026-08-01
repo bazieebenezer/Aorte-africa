@@ -48,8 +48,8 @@ export function Solves() {
         {SERVICES.map((service) => (
           <motion.div key={service.title} variants={staggerChild} className="min-w-0">
             <TiltCard className="group h-full rounded-xl bg-gradient-to-br from-secondary to-background p-6 transition-colors duration-300 hover:border-border-hover">
-              <div className="mb-4 flex size-12 items-center justify-center rounded-lg border border-primary/30 bg-primary/5 transition-all duration-300 group-hover:bg-primary/15 group-hover:scale-110">
-                <service.icon className="size-6 text-primary" />
+              <div className="mb-4 flex size-14 items-center justify-center rounded-full border border-border bg-gradient-to-b from-secondary to-background transition-all duration-300 group-hover:border-primary/40 group-hover:shadow-[0_0_30px_rgba(64,255,35,0.15)]">
+                <service.icon className="size-6 text-foreground transition-colors duration-300 group-hover:text-primary" />
               </div>
               <h3 className="text-silver fs-card-title mb-4 font-semibold leading-snug">
                 {service.title}
