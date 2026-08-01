@@ -37,6 +37,9 @@ export const POST_QUERY = `
     "thumbnail": thumbnail.asset->url,
     "readingTime": round(length(pt::text(body)) / 1200),
     author,
-    body
+    "body": body[]{
+      ...,
+      asset->{url}
+    }
   }
 `;
