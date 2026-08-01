@@ -4,7 +4,6 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { BadgeCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Magnetic } from "@/components/magnetic";
 
 const TITLE_WORDS = ["Graduatim,", "Potens."];
 
@@ -85,11 +84,9 @@ export function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 1, ease: "backOut" }}
         >
-          <Magnetic>
-            <Button asChild size="lg" className="font-semibold">
-              <a href="#presentation">Découvrir l&apos;empire</a>
-            </Button>
-          </Magnetic>
+          <Button asChild size="lg" className="font-semibold">
+            <a href="#presentation">Découvrir l&apos;empire</a>
+          </Button>
         </motion.div>
 
         <motion.div
