@@ -1,5 +1,6 @@
 /**
- * Script de seed : importe les articles d'exemple dans Sanity.
+ * Script de seed : importe les articles d'exemple dans Sanity,
+ * y compris leurs images de couverture.
  *
  * Usage :
  *  1. Configurez SANITY_PROJECT_ID, SANITY_DATASET et SANITY_API_TOKEN
@@ -7,6 +8,8 @@
  *  2. Lancez : npm run seed
  */
 import "dotenv/config";
+import { createReadStream } from "node:fs";
+import path from "node:path";
 import { createClient } from "@sanity/client";
 import { samplePosts } from "../src/lib/blog-data";
 
@@ -25,19 +28,48 @@ const client = createClient({
   useCdn: false,
 });
 
+async function uploadThumbnail(post: (typeof samplePosts)[number]) {
+  const filePath = path.join(
+    process.cwd(),
+    "public",
+    post.thumbnail.replace(/^\//, "")
+  );
+  const asset = await client.assets.upload(
+    "image",
+    createReadStream(filePath),
+    { filename: path.basename(post.thumbnail) }
+  );
+  return { _type: "image", asset: { _type: "reference", _ref: asset._id } };
+}
+
 async function seed() {
   let created = 0;
+  let patched = 0;
   let skipped = 0;
 
   for (const post of samplePosts) {
     const existing = await client.fetch(
-      `*[_type == "post" && slug.current == $slug][0]._id`,
+      `*[_type == "post" && slug.current == $slug][0] {
+        _id,
+        "hasThumbnail": defined(thumbnail.asset)
+      }`,
       { slug: post.slug }
     );
 
+    const thumbnail = await uploadThumbnail(post);
+
     if (existing) {
-      console.log(`- Déjà présent, ignoré : ${post.title}`);
-      skipped++;
+      if (!existing.hasThumbnail) {
+        await client
+          .patch(existing._id)
+          .set({ thumbnail })
+          .commit();
+        console.log(`~ Image de couverture ajoutée : ${post.title}`);
+        patched++;
+      } else {
+        console.log(`- Déjà présent, ignoré : ${post.title}`);
+        skipped++;
+      }
       continue;
     }
 
@@ -48,15 +80,16 @@ async function seed() {
       publishedAt: post.publishedAt,
       excerpt: post.excerpt,
       tags: post.tags,
+      author: post.author,
+      thumbnail,
       body: post.body,
     });
     console.log(`+ Créé : ${post.title}`);
     created++;
   }
 
-  console.log(`\nTerminé : ${created} créé(s), ${skipped} ignoré(s).`);
   console.log(
-    "Pensez à définir l'image de couverture (thumbnail) de chaque article depuis le studio."
+    `\nTerminé : ${created} créé(s), ${patched} image(s) ajoutée(s), ${skipped} ignoré(s).`
   );
 }
 
