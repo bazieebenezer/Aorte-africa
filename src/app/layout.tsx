@@ -3,7 +3,6 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { SiteHeader } from "@/components/site-header";
 import { Footer } from "@/components/footer";
-import { ProgressBar } from "@/components/progress-bar";
 import { BackToTop } from "@/components/back-to-top";
 import { Toaster } from "@/components/ui/sonner";
 
@@ -33,7 +32,6 @@ export default function RootLayout({
   return (
     <html lang="fr" className={`${inter.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">
-        <ProgressBar />
         <SiteHeader />
         <main className="flex flex-1 flex-col">{children}</main>
         <Footer />
