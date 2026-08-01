@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { CalendarDays, ChevronLeft, ChevronRight, Clock3, UserRound } from "lucide-react";
-import { client, isSanityConfigured, POST_QUERY } from "@/lib/sanity";
+import { client, isSanityConfigured, POST_QUERY, POSTS_QUERY } from "@/lib/sanity";
 import { samplePosts, formatDate, type Post } from "@/lib/blog-data";
 import { ArticleBody } from "@/components/blog/article-body";
 import { ShareButton } from "@/components/blog/share-button";
@@ -17,7 +17,7 @@ type Props = {
 async function getPosts(): Promise<Post[]> {
   if (isSanityConfigured && client) {
     try {
-      return await client.fetch<Post[]>("*[_type == 'post'] | order(publishedAt desc)");
+      return await client.fetch<Post[]>(POSTS_QUERY);
     } catch (error) {
       console.error("Échec du fetch Sanity, repli sur les données locales :", error);
     }
