@@ -41,7 +41,9 @@ export function ContactDialog({
       <DialogContent className="sm:max-w-[560px]">
         <DialogHeader className="text-left">
           <DialogTitle className="text-2xl">Contactez-nous.</DialogTitle>
-          <DialogDescription>Tesseras volvuntur.</DialogDescription>
+          <DialogDescription>
+            Notre équipe vous répondra dans les plus brefs délais.
+          </DialogDescription>
         </DialogHeader>
 
         <form onSubmit={onSubmit} className="flex flex-col gap-4">

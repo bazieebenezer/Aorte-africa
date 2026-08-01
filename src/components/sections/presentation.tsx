@@ -68,7 +68,7 @@ export function Presentation() {
 
       <Reveal direction="up" delay={0.1} className="mt-6">
         <SectionTitle>
-          Le coeur battant de votre{" "}
+          Le cœur battant de votre{" "}
           <span className="text-muted-foreground">écosystème numérique.</span>
         </SectionTitle>
       </Reveal>

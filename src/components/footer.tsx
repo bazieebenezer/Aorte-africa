@@ -12,9 +12,6 @@ const NAVIGATION = [
 
 const PRESENCE = [
   { label: "LinkedIn", href: "https://www.linkedin.com/company/aorte-africa/" },
-  { label: "Facebook", href: "#" },
-  { label: "YouTube", href: "#" },
-  { label: "TikTok", href: "#" },
 ];
 
 export function Footer() {

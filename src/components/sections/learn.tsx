@@ -4,7 +4,6 @@ import Image from "next/image";
 import { Reveal } from "@/components/motion/reveal";
 import { Stagger, staggerChild } from "@/components/motion/stagger";
 import { motion } from "framer-motion";
-import { Play } from "lucide-react";
 import { TiltCard } from "@/components/tilt-card";
 import {
   SectionSubtitle,
@@ -79,11 +78,11 @@ export function Learn() {
                 Donnez vie à l&apos;image : de l&apos;intention à la création.
               </h3>
               <p className="leading-relaxed text-muted-foreground">
-                Apprenez à structurer vos idées pour qu&apos;elles captent l&apos;oeil. Nous
+                Apprenez à structurer vos idées pour qu&apos;elles                 captent l&apos;œil. Nous
                 explorons l&apos;équilibre des formes et la force des couleurs.
               </p>
               <span className="mt-4 inline-block rounded-full border border-border bg-secondary px-4 py-1.5 text-xs text-muted-foreground">
-                L&apos;ESTHETIQUE AU SERVICE DE L&apos;IMPACT.
+                L&apos;ESTHÉTIQUE AU SERVICE DE L&apos;IMPACT.
               </span>
             </div>
             <div className="relative flex w-full max-w-[420px] flex-1 items-center justify-center">
@@ -94,10 +93,6 @@ export function Learn() {
                 height={260}
                 className="h-auto w-full object-contain"
               />
-              <div className="absolute flex items-center gap-2 rounded-lg bg-background/80 px-4 py-2 text-sm font-medium backdrop-blur-sm">
-                <Play className="size-3.5" />
-                Commencer à créer
-              </div>
             </div>
           </div>
         </TiltCard>

@@ -33,7 +33,7 @@ export function Dream() {
   return (
     <section id="dream" className="flex flex-col items-center px-4 py-[clamp(36px,8vw,72px)] pb-[clamp(80px,15vw,200px)] sm:px-6 lg:px-8">
       <Reveal direction="down">
-        <SectionTag>L&apos;entité Aorte</SectionTag>
+        <SectionTag>La vision</SectionTag>
       </Reveal>
 
       <Reveal direction="up" delay={0.1} className="mt-4">
@@ -63,7 +63,7 @@ export function Dream() {
           {VALUES.map((value) => (
             <motion.div key={value.title} variants={staggerChild} className="min-w-0">
               <TiltCard className="group h-full rounded-xl border border-border bg-gradient-to-tr from-background/80 to-card p-6 transition-colors duration-300 hover:border-border-hover">
-                <div className="mb-4 flex size-14 items-center justify-center rounded-full border border-border bg-gradient-to-b from-secondary to-background transition-all duration-300 group-hover:border-primary/40 group-hover:shadow-[0_0_30px_rgba(64,255,35,0.15)]">
+                <div className="mb-4 flex size-14 items-center justify-center rounded-full border border-border bg-gradient-to-b from-secondary to-background transition-all duration-300 group-hover:border-primary/40 group-hover:shadow-[0_0_20px_rgba(64,255,35,0.08)]">
                   <value.icon className="size-6 text-foreground transition-colors duration-300 group-hover:text-primary" />
                 </div>
                 <h3 className="text-silver mb-2 text-sm font-semibold tracking-wide">

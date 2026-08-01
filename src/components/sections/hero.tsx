@@ -47,7 +47,7 @@ export function Hero() {
           className="mb-10 flex items-center gap-2 rounded-full border border-accent/40 bg-accent/5 px-4 py-1.5 text-xs text-accent sm:mb-16"
         >
           <BadgeCheck className="size-4" />
-          <span>BATI SUR LA PASSION</span>
+          <span>BÂTI SUR LA PASSION</span>
         </motion.div>
 
         <h1 className="fs-hero flex flex-col items-center gap-1 text-center font-semibold leading-[1.05] sm:gap-2">
