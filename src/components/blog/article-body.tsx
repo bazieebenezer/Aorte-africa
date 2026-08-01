@@ -1,6 +1,7 @@
 import { PortableText, type PortableTextComponents } from "@portabletext/react";
 import type { PortableTextBlock } from "@portabletext/types";
 import Image from "next/image";
+import { Quote } from "lucide-react";
 
 const components: PortableTextComponents = {
   block: {
@@ -18,14 +19,11 @@ const components: PortableTextComponents = {
       </h3>
     ),
     blockquote: ({ children }) => (
-      <blockquote className="relative my-10 border-l border-border pl-6 text-foreground">
-        <span
-          aria-hidden
-          className="absolute -top-7 -left-1 font-serif text-6xl leading-none text-primary/25"
-        >
-          «
-        </span>
-        <p className="fs-body-lg font-medium leading-relaxed">{children}</p>
+      <blockquote className="my-10 rounded-2xl border border-border bg-card p-7 sm:p-8">
+        <div className="mb-4 flex size-9 items-center justify-center rounded-lg border border-border bg-secondary">
+          <Quote className="size-4 text-primary" />
+        </div>
+        <p className="leading-relaxed text-foreground">{children}</p>
       </blockquote>
     ),
   },
