@@ -15,8 +15,8 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: "Aorte — Graduatim, Potens.",
-    template: "%s — Aorte",
+    default: "Aorte - Graduatim, Potens.",
+    template: "%s - Aorte",
   },
   description:
     "Nous ne créons pas seulement des outils, nous forgeons l'infrastructure numérique d'une nouvelle génération.",
