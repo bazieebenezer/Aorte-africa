@@ -20,8 +20,8 @@ const components: PortableTextComponents = {
     ),
     blockquote: ({ children }) => (
       <blockquote className="my-10 rounded-2xl border border-border bg-card p-7 sm:p-8">
-        <div className="mb-4 flex size-9 items-center justify-center rounded-lg border border-border bg-secondary">
-          <Quote className="size-4 text-primary" />
+        <div className="mb-4 flex size-9 items-center justify-center rounded-full border border-border bg-gradient-to-b from-secondary to-background">
+          <Quote className="size-4 text-foreground" />
         </div>
         <p className="leading-relaxed text-foreground">{children}</p>
       </blockquote>
