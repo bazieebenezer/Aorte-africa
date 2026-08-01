@@ -3,10 +3,12 @@ import Link from "next/link";
 import { ArrowRight, CalendarDays, Clock3, UserRound } from "lucide-react";
 import type { Post } from "@/lib/blog-data";
 import { formatDate } from "@/lib/blog-data";
+import { TiltCard } from "@/components/tilt-card";
 
 export function PostCard({ post }: { post: Post }) {
   return (
-    <article className="group h-[460px] overflow-hidden rounded-2xl border border-border bg-card transition-colors duration-200 hover:border-border-hover">
+    <TiltCard className="group h-[460px] rounded-2xl border border-border bg-card transition-colors duration-200 hover:border-border-hover">
+      <article className="h-full overflow-hidden rounded-2xl">
       <Link href={`/blog/${post.slug}`} className="flex h-full flex-col">
         <div className="relative h-48 shrink-0 overflow-hidden bg-secondary/60">
           <Image
@@ -48,6 +50,7 @@ export function PostCard({ post }: { post: Post }) {
           </div>
         </div>
       </Link>
-    </article>
+      </article>
+    </TiltCard>
   );
 }
