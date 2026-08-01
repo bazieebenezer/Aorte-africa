@@ -40,9 +40,13 @@ export function Newsletter() {
               onChange={(e) => setEmail(e.target.value)}
               placeholder="votre@email.com"
               aria-label="Votre adresse email"
-              className="h-11 flex-1"
+              className="h-14 flex-1 text-base sm:h-16"
             />
-            <Button type="submit" disabled={submitting} className="h-11">
+            <Button
+              type="submit"
+              disabled={submitting}
+              className="h-14 px-8 text-base sm:h-16"
+            >
               {submitting ? "Envoi..." : "S'abonner"}
             </Button>
           </form>
