@@ -74,7 +74,9 @@ export function BlogFeed({ posts }: { posts: Post[] }) {
         />
         <div className="relative z-10 mx-auto max-w-2xl px-4 sm:px-6">
           <Reveal direction="up">
-            <h1 className="text-silver fs-display font-semibold tracking-tight">Blog</h1>
+            <h1 className="text-silver fs-display font-semibold tracking-tight">
+              Chaque étape compte
+            </h1>
           </Reveal>
           <Reveal direction="up" delay={0.08}>
             <p className="fs-body-lg mt-5 leading-relaxed text-muted-foreground">
