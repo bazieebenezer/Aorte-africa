@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Search, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, Search, X } from "lucide-react";
 import { PostCard } from "@/components/blog/post-card";
 import { Reveal } from "@/components/motion/reveal";
 import type { Post } from "@/lib/blog-data";
@@ -20,9 +20,26 @@ const CATEGORIES = [
   "Carrière",
 ];
 
+const PAGE_SIZE = 6;
+
+function getPageNumbers(current: number, total: number): (number | "…")[] {
+  if (total <= 7) {
+    return Array.from({ length: total }, (_, i) => i + 1);
+  }
+  const pages: (number | "…")[] = [1];
+  const start = Math.max(2, current - 1);
+  const end = Math.min(total - 1, current + 1);
+  if (start > 2) pages.push("…");
+  for (let i = start; i <= end; i++) pages.push(i);
+  if (end < total - 1) pages.push("…");
+  pages.push(total);
+  return pages;
+}
+
 export function BlogFeed({ posts }: { posts: Post[] }) {
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState("Tous");
+  const [page, setPage] = useState(1);
   const inputRef = useRef<HTMLInputElement>(null);
   const [isMac] = useState(
     () => typeof navigator !== "undefined" && /Mac|iPhone|iPad/i.test(navigator.platform)
@@ -39,6 +56,10 @@ export function BlogFeed({ posts }: { posts: Post[] }) {
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
+  useEffect(() => {
+    setPage(1);
+  }, [query, category]);
+
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
     return posts.filter((post) => {
@@ -52,6 +73,14 @@ export function BlogFeed({ posts }: { posts: Post[] }) {
       );
     });
   }, [posts, query, category]);
+
+  const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+  const currentPage = Math.min(page, totalPages);
+  const visible = filtered.slice(
+    (currentPage - 1) * PAGE_SIZE,
+    currentPage * PAGE_SIZE
+  );
+  const pageNumbers = getPageNumbers(currentPage, totalPages);
 
   return (
     <>
@@ -132,17 +161,71 @@ export function BlogFeed({ posts }: { posts: Post[] }) {
 
       <div className="mx-auto w-full max-w-6xl px-4 sm:px-6">
         {filtered.length > 0 && (
-          <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {filtered.map((post, i) => (
-              <Reveal
-                key={post.slug}
-                direction="up"
-                delay={Math.min(0.1 + i * 0.06, 0.3)}
+          <>
+            <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {visible.map((post, i) => (
+                <Reveal
+                  key={post.slug}
+                  direction="up"
+                  delay={Math.min(0.1 + i * 0.06, 0.3)}
+                >
+                  <PostCard post={post} />
+                </Reveal>
+              ))}
+            </div>
+
+            {totalPages > 1 && (
+              <nav
+                aria-label="Pagination des articles"
+                className="mt-12 flex flex-wrap items-center justify-center gap-2"
               >
-                <PostCard post={post} />
-              </Reveal>
-            ))}
-          </div>
+                <button
+                  onClick={() => setPage(Math.max(1, currentPage - 1))}
+                  disabled={currentPage === 1}
+                  aria-label="Page précédente"
+                  className="flex items-center gap-1.5 rounded-full border px-4 py-1.5 text-sm font-medium text-muted-foreground transition-colors duration-200 hover:border-border-hover hover:text-foreground disabled:pointer-events-none disabled:opacity-40"
+                >
+                  <ChevronLeft className="size-4" />
+                  Précédent
+                </button>
+
+                {pageNumbers.map((p, i) =>
+                  p === "…" ? (
+                    <span
+                      key={`ellipsis-${i}`}
+                      className="px-1 text-sm text-muted-foreground"
+                    >
+                      …
+                    </span>
+                  ) : (
+                    <button
+                      key={p}
+                      onClick={() => setPage(p)}
+                      aria-current={p === currentPage ? "page" : undefined}
+                      className={cn(
+                        "rounded-full border px-3.5 py-1.5 text-sm font-medium transition-colors duration-200",
+                        p === currentPage
+                          ? "border-foreground bg-foreground text-background"
+                          : "border-border text-muted-foreground hover:border-border-hover hover:text-foreground"
+                      )}
+                    >
+                      {p}
+                    </button>
+                  )
+                )}
+
+                <button
+                  onClick={() => setPage(Math.min(totalPages, currentPage + 1))}
+                  disabled={currentPage === totalPages}
+                  aria-label="Page suivante"
+                  className="flex items-center gap-1.5 rounded-full border px-4 py-1.5 text-sm font-medium text-muted-foreground transition-colors duration-200 hover:border-border-hover hover:text-foreground disabled:pointer-events-none disabled:opacity-40"
+                >
+                  Suivant
+                  <ChevronRight className="size-4" />
+                </button>
+              </nav>
+            )}
+          </>
         )}
 
         {filtered.length === 0 && (

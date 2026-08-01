@@ -60,9 +60,39 @@ export default async function ArticlePage({ params }: Props) {
 
   return (
     <article className="mx-auto w-full max-w-[720px] flex-1 px-4 pb-24 sm:px-6">
+      <nav aria-label="Fil d'ariane" className="mt-32 sm:mt-40">
+        <ol className="flex flex-wrap items-center gap-1.5 text-sm text-muted-foreground">
+          <li>
+            <Link
+              href="/"
+              className="transition-colors duration-200 hover:text-foreground"
+            >
+              Accueil
+            </Link>
+          </li>
+          <li aria-hidden="true" className="flex items-center">
+            <ChevronRight className="size-3.5" />
+          </li>
+          <li>
+            <Link
+              href="/blog"
+              className="transition-colors duration-200 hover:text-foreground"
+            >
+              Blog
+            </Link>
+          </li>
+          <li aria-hidden="true" className="flex items-center">
+            <ChevronRight className="size-3.5" />
+          </li>
+          <li className="line-clamp-1 max-w-[280px] font-medium text-foreground sm:max-w-xs">
+            {post.title}
+          </li>
+        </ol>
+      </nav>
+
       <Link
         href="/blog"
-        className="group mb-12 mt-32 inline-flex items-center gap-2 text-sm font-medium text-muted-foreground transition-all duration-200 hover:gap-3 hover:text-foreground sm:mt-40"
+        className="group mb-12 mt-8 inline-flex items-center gap-2 text-sm font-medium text-muted-foreground transition-all duration-200 hover:gap-3 hover:text-foreground"
       >
         <ChevronLeft className="size-4 transition-transform duration-200 group-hover:-translate-x-0.5" />
         Retour au blog
