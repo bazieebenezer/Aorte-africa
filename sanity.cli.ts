@@ -6,4 +6,7 @@ export default defineCliConfig({
     dataset: process.env.SANITY_DATASET ?? "production",
   },
   studioHost: "aorte",
+  deployment: {
+    appId: "lvnp2dving99fmwb1ic3auci",
+  },
 });
