@@ -55,18 +55,6 @@
   --radius-2xl: calc(var(--radius) + 8px);
 }
 
-@keyframes silver-shine {
-  0% {
-    background-position: 0% center;
-  }
-  50% {
-    background-position: 100% center;
-  }
-  100% {
-    background-position: 0% center;
-  }
-}
-
 @utility text-silver {
   background: linear-gradient(
     -45deg,
@@ -76,11 +64,9 @@
     #ffffff 75%,
     #777777 100%
   );
-  background-size: 200% auto;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  animation: silver-shine 4s ease-in-out infinite;
 }
 
 @utility fs-hero {
