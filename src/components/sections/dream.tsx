@@ -69,7 +69,7 @@ export function Dream() {
                 <h3 className="text-silver mb-2 text-sm font-semibold tracking-wide">
                   {value.title}
                 </h3>
-                <p className="text-center leading-relaxed text-muted-foreground sm:text-left">
+                <p className="leading-relaxed text-muted-foreground text-left">
                   {value.text}
                 </p>
               </TiltCard>
