@@ -40,6 +40,12 @@ export const post = defineType({
       options: { layout: "tags" },
     }),
     defineField({
+      name: "author",
+      title: "Auteur",
+      type: "string",
+      initialValue: "Équipe Aorte",
+    }),
+    defineField({
       name: "thumbnail",
       title: "Image de couverture",
       type: "image",

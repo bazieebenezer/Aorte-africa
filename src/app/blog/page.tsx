@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import { client, isSanityConfigured, POSTS_QUERY } from "@/lib/sanity";
 import { samplePosts, type Post } from "@/lib/blog-data";
-import { PostsGrid } from "@/components/blog/posts-grid";
+import { BlogFeed } from "@/components/blog/blog-feed";
+import { Newsletter } from "@/components/blog/newsletter";
 
 export const metadata: Metadata = {
   title: "Blog",
   description:
-    "Exploration, innovation et vision : le journal d'Aorte.",
+    "Guides pratiques sur l'intelligence artificielle, le développement logiciel et les technologies modernes.",
 };
 
 export const revalidate = 3600;
@@ -26,20 +27,9 @@ export default async function BlogPage() {
   const posts = await getPosts();
 
   return (
-    <div className="mx-auto w-full max-w-[1140px] flex-1 px-4 pb-24 sm:px-6">
-      <header className="pt-40 pb-16 text-center sm:pt-48">
-        <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/15 bg-primary/10 px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[2.5px] text-primary">
-          Blog
-        </span>
-        <h1 className="text-silver fs-display font-bold tracking-tight">
-          Le Journal
-        </h1>
-        <p className="fs-body-lg mx-auto mt-5 max-w-[480px] leading-relaxed text-muted-foreground">
-          Exploration, innovation et vision.
-        </p>
-      </header>
-
-      <PostsGrid posts={posts} />
+    <div className="flex-1 pb-24">
+      <BlogFeed posts={posts} />
+      <Newsletter />
     </div>
   );
 }

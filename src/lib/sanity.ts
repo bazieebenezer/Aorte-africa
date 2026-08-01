@@ -22,7 +22,8 @@ export const POSTS_QUERY = `
     excerpt,
     tags,
     "thumbnail": thumbnail.asset->url,
-    "readingTime": round(length(pt::text(body)) / 1200)
+    "readingTime": round(length(pt::text(body)) / 1200),
+    author
   }
 `;
 
@@ -35,6 +36,7 @@ export const POST_QUERY = `
     tags,
     "thumbnail": thumbnail.asset->url,
     "readingTime": round(length(pt::text(body)) / 1200),
+    author,
     body
   }
 `;
