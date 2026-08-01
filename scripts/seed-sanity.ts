@@ -8,10 +8,13 @@
  *  2. Lancez : npm run seed
  */
 import "dotenv/config";
+import { config } from "dotenv";
 import { createReadStream } from "node:fs";
 import path from "node:path";
 import { createClient } from "@sanity/client";
 import { samplePosts } from "../src/lib/blog-data";
+
+config({ path: ".env.local" });
 
 if (!process.env.SANITY_PROJECT_ID || !process.env.SANITY_API_TOKEN) {
   console.error(
