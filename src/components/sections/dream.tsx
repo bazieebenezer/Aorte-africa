@@ -62,14 +62,14 @@ export function Dream() {
         >
           {VALUES.map((value) => (
             <motion.div key={value.title} variants={staggerChild} className="min-w-0">
-              <TiltCard className="group h-full rounded-xl border border-border bg-gradient-to-tr from-background/80 to-card p-6 transition-colors duration-300 hover:border-border-hover">
+              <TiltCard className="group h-full rounded-xl border border-border bg-gradient-to-br from-secondary to-background p-6 transition-colors duration-300 hover:border-border-hover">
                 <div className="mb-4 flex size-14 items-center justify-center rounded-full border border-border bg-gradient-to-b from-secondary to-background transition-all duration-300 group-hover:border-primary/40 group-hover:shadow-[0_0_20px_rgba(64,255,35,0.08)]">
                   <value.icon className="size-6 text-foreground transition-colors duration-300 group-hover:text-primary" />
                 </div>
-                <h3 className="text-silver mb-2 text-sm font-semibold tracking-wide">
+                <h3 className="text-silver fs-card-title mb-4 font-semibold leading-snug">
                   {value.title}
                 </h3>
-                <p className="leading-relaxed text-muted-foreground text-left">
+                <p className="leading-relaxed text-muted-foreground">
                   {value.text}
                 </p>
               </TiltCard>

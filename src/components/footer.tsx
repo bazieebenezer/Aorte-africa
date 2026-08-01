@@ -1,6 +1,6 @@
-import Image from "next/image";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
+import { Logo } from "@/components/logo";
 
 const NAVIGATION = [
   { label: "Learn", href: "/#learn" },
@@ -20,13 +20,7 @@ export function Footer() {
       <div className="mx-auto flex max-w-6xl flex-col gap-10 md:flex-row md:justify-between">
         <div>
           <div className="flex items-center gap-3">
-            <Image
-              src="/img/logo.svg"
-              alt="Logo Aorte Group"
-              width={28}
-              height={28}
-              className="theme-logo h-7 w-auto"
-            />
+            <Logo />
             <p className="text-sm text-muted-foreground">Graduatim, Potens.</p>
           </div>
         </div>

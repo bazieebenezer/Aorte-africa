@@ -1,12 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { Logo } from "@/components/logo";
 import { cn } from "@/lib/utils";
 
 const NAV_LINKS = [
@@ -46,14 +46,7 @@ export function Navbar({ onContact }: { onContact: () => void }) {
         )}
       >
         <Link href="/#home" className="relative z-[70] flex items-center" onClick={close}>
-          <Image
-            src="/img/logo.svg"
-            alt="Aorte logo"
-            width={28}
-            height={28}
-            className="theme-logo h-7 w-auto"
-            priority
-          />
+          <Logo />
         </Link>
 
         <ul className="hidden items-center gap-6 lg:flex">

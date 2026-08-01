@@ -9,8 +9,8 @@
   --card-foreground: #181818;
   --popover: #ffffff;
   --popover-foreground: #181818;
-  --primary: #40ff23;
-  --primary-foreground: #0e100f;
+  --primary: #015eff;
+  --primary-foreground: #ffffff;
   --secondary: #e8e8e8;
   --secondary-foreground: #181818;
   --muted: #f1f1f1;
@@ -22,13 +22,14 @@
   --border: #e5e5e5;
   --border-hover: #c7c7c7;
   --input: #e5e5e5;
-  --ring: #40ff23;
+  --ring: #015eff;
   --radius: 0.625rem;
+  --logo-color: #015eff;
 }
 
-/* Texte vert sur fond clair : vert sombre lisible (le néon serait illisible) */
+/* Texte vert sur fond clair : le bleu brand #015eff est lisible (5,2:1) */
 :root:not(.dark) .text-primary {
-  color: #15803d;
+  color: #015eff;
 }
 
 .dark {
@@ -52,6 +53,7 @@
   --border-hover: #2e2e2e;
   --input: #1a1a1a;
   --ring: #40ff23;
+  --logo-color: #39ff14;
 }
 
 @theme inline {
@@ -112,9 +114,12 @@
   color: transparent;
 }
 
-/* Logo vert néon : assombri en mode clair pour rester lisible */
-:root:not(.dark) .theme-logo {
-  filter: brightness(0.42) saturate(1.4);
+/* Logo monochrome recoloré via masque : bleu #015eff en clair, vert néon en sombre */
+@utility logo-mask {
+  display: inline-block;
+  background-color: var(--logo-color);
+  -webkit-mask: url(/img/logo.svg) center / contain no-repeat;
+  mask: url(/img/logo.svg) center / contain no-repeat;
 }
 
 /* Grille décorative blanche : inversée en mode clair */
