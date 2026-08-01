@@ -30,6 +30,74 @@ function blocks(items: BlockItem[]): PortableTextBlock[] {
 
 export const samplePosts: Post[] = [
   {
+    title: "Sécurité des API : les failles que les développeurs négligent",
+    slug: "securite-api-failles-negligees",
+    publishedAt: "2026-08-01T09:00:00Z",
+    excerpt:
+      "L'authentification ne suffit pas : le vrai danger se cache dans les erreurs d'autorisation, la validation des entrées et les secrets qui traînent dans les logs.",
+    tags: ["Backend"],
+    thumbnail: "/img/Solution-icon2.svg",
+    readingTime: 7,
+    author: "Équipe Aorte",
+    body: blocks([
+      {
+        text: "Lorsqu'on parle de sécurité d'une API, le premier réflexe est de penser à l'authentification : un bon login, des tokens, c'est réglé. La réalité est plus dérangeante : la plupart des failles graves ne viennent pas de l'absence d'authentification, mais de décisions banales prises chaque jour — une comparaison mal écrite, un champ ignoré, un log trop bavard.",
+      },
+      {
+        text: "Voici les failles que nous croisons le plus souvent dans les audits, et les réflexes qui permettent de les éviter sans ralentir le développement.",
+      },
+      {
+        h2: "L'authentification : la première ligne, pas la dernière",
+      },
+      {
+        text: "Un token bien généré ne protège rien si la vérification est bâclée. La règle la plus rentable : ne jamais écrire soi-même la comparaison des secrets. Utilisez la fonction de comparaison à temps constant de votre framework, celle qui garantit le même temps de réponse quelle que soit la saisie, sinon votre endpoint devient une machine à deviner les signatures.",
+      },
+      {
+        text: "Deuxième réflexe : vérifiez toujours l'expiration. Un token dont la durée de vie n'est jamais contrôlée est un passe-droit permanent, surtout pour les tokens de rafraîchissement qui restent valables des semaines entières par défaut dans certains services.",
+      },
+      {
+        h2: "Les erreurs d'autorisation, la faille la plus sous-estimée",
+      },
+      {
+        text: "L'authentification répond à la question « qui êtes-vous ? ». L'autorisation répond à « avez-vous le droit de faire ça ? ». Une API sécurisée vérifie les deux, et le point sensible est presque toujours le second : un utilisateur connecté peut-il lire la ressource d'un autre ? Modifier un document dont il n'est pas propriétaire ?",
+      },
+      {
+        text: "La technique qui évite 90 % des problèmes : centraliser la vérification. Créez une fonction can(user, action, resource) unique, utilisée partout, plutôt que des contrôles dispersés dans chaque route. Un contrôle oublié dans une route sur vingt suffit à rendre votre API vulnérable.",
+      },
+      {
+        quote:
+          "La sécurité d'une API ne se mesure pas à sa porte d'entrée, mais à chaque porte intérieure.",
+      },
+      {
+        h2: "La validation des entrées, ou la porte restée ouverte",
+      },
+      {
+        text: "Tout ce qui entre dans votre API est hostile jusqu'à preuve du contraire. Les types, les longueurs, les formats : tout doit être validé, y compris les champs que vous n'utilisez pas. Un champ bonus ignoré par votre code mais accepté par votre base peut être le vecteur d'une injection ou d'une fuite de données.",
+      },
+      {
+        text: "Utilisez un schéma de validation déclaratif pour chaque entrée, et rejetez ce qui ne correspond pas plutôt que de le nettoyer. Le modèle « refuse les inconnus » est plus sûr et plus simple à raisonner que le modèle « accepte tout puis assainit ».",
+      },
+      {
+        h2: "Les secrets et les logs, les traîtres silencieux",
+      },
+      {
+        text: "Un secret n'est un secret que s'il n'apparaît nulle part : ni dans le code, ni dans la config versionnée, ni dans les réponses d'erreur. Les messages d'exception sont des candidats naturels : ils finissent dans les logs, qui finissent dans les outils de monitoring, qui peuvent être consultés par d'autres équipes.",
+      },
+      {
+        text: "Passez en revue vos logs comme un intrus le ferait : un token en clair dans une URL d'appel interne, une clé d'API dans un en-tête de débogage, un mot de passe dans une erreur de connexion. Chacune de ces apparitions est une fuite qui attend son moment.",
+      },
+      {
+        h2: "La checklist de l'audit rapide",
+      },
+      {
+        text: "Une heure suffit pour couvrir l'essentiel : testez chaque endpoint sans token (le rejet est-il propre ?), avec un token d'un autre utilisateur (les ressources sont-elles isolées ?), avec des entrées hors normes (le schéma les rejette-t-il ?), et enfin avec un requête dont l'historique complet finirait dans les logs (que voit-on vraiment ?).",
+      },
+      {
+        text: "La sécurité n'est pas un module à brancher en fin de projet : c'est une discipline de chaque commit, et ces réflexes coûtent moins de temps qu'une fuite de données n'en fera perdre.",
+      },
+    ]),
+  },
+  {
     title: "Comprendre MCP : le protocole qui connecte les agents IA",
     slug: "comprendre-mcp-protocole-agents-ia",
     publishedAt: "2026-07-29T09:00:00Z",
