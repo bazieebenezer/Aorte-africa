@@ -87,7 +87,7 @@ export function BlogFeed({ posts }: { posts: Post[] }) {
       <header className="relative overflow-hidden pt-40 pb-14 text-center sm:pt-48">
         <div
           aria-hidden
-          className="absolute inset-0 z-0"
+          className="theme-grid absolute inset-0 z-0"
           style={{
             backgroundImage: "url(/img/grid.svg)",
             backgroundSize: "contain",

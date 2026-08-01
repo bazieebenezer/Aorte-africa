@@ -36,7 +36,7 @@ export function Hero() {
           maskImage:
             "radial-gradient(ellipse 85% 75% at 50% 45%, #000 0%, transparent 78%)",
         }}
-        className="absolute inset-0 z-0"
+        className="theme-grid absolute inset-0 z-0"
       />
 
       <motion.div

@@ -3,6 +3,30 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
+  --background: #fafafa;
+  --foreground: #181818;
+  --card: #ffffff;
+  --card-foreground: #181818;
+  --popover: #ffffff;
+  --popover-foreground: #181818;
+  --primary: #15803d;
+  --primary-foreground: #ffffff;
+  --secondary: #e8e8e8;
+  --secondary-foreground: #181818;
+  --muted: #f1f1f1;
+  --muted-foreground: #565656;
+  --accent: #0f766e;
+  --accent-foreground: #ffffff;
+  --destructive: #dc2626;
+  --destructive-foreground: #ffffff;
+  --border: #e5e5e5;
+  --border-hover: #c7c7c7;
+  --input: #e5e5e5;
+  --ring: #15803d;
+  --radius: 0.625rem;
+}
+
+.dark {
   --background: #0b0b0b;
   --foreground: #fafafa;
   --card: #151515;
@@ -23,7 +47,6 @@
   --border-hover: #2e2e2e;
   --input: #1a1a1a;
   --ring: #40ff23;
-  --radius: 0.625rem;
 }
 
 @theme inline {
@@ -67,6 +90,31 @@
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+}
+
+/* Mode clair : dégradé argenté plus sombre pour garder un contraste lisible */
+:root:not(.dark) .text-silver {
+  background: linear-gradient(
+    -45deg,
+    #333333 0%,
+    #4d4d4d 25%,
+    #666666 50%,
+    #4d4d4d 75%,
+    #333333 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Logo vert néon : assombri en mode clair pour rester lisible */
+:root:not(.dark) .theme-logo {
+  filter: brightness(0.42) saturate(1.4);
+}
+
+/* Grille décorative blanche : inversée en mode clair */
+:root:not(.dark) .theme-grid {
+  filter: invert(1);
 }
 
 @utility fs-hero {
@@ -164,6 +212,12 @@
     pointer-events: none;
     opacity: 0.035;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* Grain sombre (bruit inversé) en mode clair */
+  :root:not(.dark) body::after {
+    opacity: 0.055;
+    filter: invert(1);
   }
 
   h1,

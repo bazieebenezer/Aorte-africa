@@ -6,6 +6,7 @@ import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { cn } from "@/lib/utils";
 
 const NAV_LINKS = [
@@ -50,7 +51,7 @@ export function Navbar({ onContact }: { onContact: () => void }) {
             alt="Aorte logo"
             width={28}
             height={28}
-            className="h-7 w-auto"
+            className="theme-logo h-7 w-auto"
             priority
           />
         </Link>
@@ -69,24 +70,28 @@ export function Navbar({ onContact }: { onContact: () => void }) {
           ))}
         </ul>
 
-        <div className="hidden lg:block">
-          <Button onClick={onContact} size="sm">
-            Contact
-          </Button>
-        </div>
+        <div className="flex items-center gap-3">
+          <div className="hidden lg:block">
+            <Button onClick={onContact} size="sm">
+              Contact
+            </Button>
+          </div>
 
-        <button
-          onClick={() => setOpen(!open)}
-          aria-label={open ? "Fermer le menu" : "Ouvrir le menu"}
-          className={cn(
-            "relative z-[70] flex size-10 items-center justify-center rounded-md border transition-colors lg:hidden",
-            open
-              ? "border-border bg-foreground/5 text-foreground"
-              : "border-border text-muted-foreground hover:text-foreground"
-          )}
-        >
-          {open ? <X className="size-5" /> : <Menu className="size-5" />}
-        </button>
+          <ThemeToggle />
+
+          <button
+            onClick={() => setOpen(!open)}
+            aria-label={open ? "Fermer le menu" : "Ouvrir le menu"}
+            className={cn(
+              "relative z-[70] flex size-10 items-center justify-center rounded-md border transition-colors lg:hidden",
+              open
+                ? "border-border bg-foreground/5 text-foreground"
+                : "border-border text-muted-foreground hover:text-foreground"
+            )}
+          >
+            {open ? <X className="size-5" /> : <Menu className="size-5" />}
+          </button>
+        </div>
       </nav>
 
       <AnimatePresence>
@@ -96,7 +101,7 @@ export function Navbar({ onContact }: { onContact: () => void }) {
             animate={{ opacity: 1, clipPath: "circle(150% at calc(100% - 48px) 48px)" }}
             exit={{ opacity: 0, clipPath: "circle(0% at calc(100% - 48px) 48px)" }}
             transition={{ duration: 0.7, ease: [0.4, 0, 0.2, 1] }}
-            className="fixed inset-0 z-[60] flex flex-col overflow-hidden bg-gradient-to-b from-background via-[#101010] to-background lg:hidden"
+            className="fixed inset-0 z-[60] flex flex-col overflow-hidden bg-gradient-to-b from-background via-secondary to-background lg:hidden"
           >
 
             <nav className="relative z-10 flex flex-1 flex-col items-center justify-center gap-1 px-6">

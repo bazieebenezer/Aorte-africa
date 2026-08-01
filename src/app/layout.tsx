@@ -4,6 +4,7 @@ import "./globals.css";
 import { SiteHeader } from "@/components/site-header";
 import { Footer } from "@/components/footer";
 import { BackToTop } from "@/components/back-to-top";
+import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 
 const inter = Inter({
@@ -30,13 +31,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fr" className={`${inter.variable} h-full antialiased`}>
+    <html lang="fr" suppressHydrationWarning className={`${inter.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">
-        <SiteHeader />
-        <main className="flex flex-1 flex-col">{children}</main>
-        <Footer />
-        <BackToTop />
-        <Toaster position="bottom-right" />
+        <ThemeProvider>
+          <SiteHeader />
+          <main className="flex flex-1 flex-col">{children}</main>
+          <Footer />
+          <BackToTop />
+          <Toaster position="bottom-right" />
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -25,7 +25,7 @@ export function Footer() {
               alt="Logo Aorte Group"
               width={28}
               height={28}
-              className="h-7 w-auto"
+              className="theme-logo h-7 w-auto"
             />
             <p className="text-sm text-muted-foreground">Graduatim, Potens.</p>
           </div>
