@@ -1,1 +1,0 @@
-import{p as e}from"./BehaviorSubject-CWOT1Ix2.js";var t=e(function(e){return function(){e(this),this.name=`EmptyError`,this.message=`no elements in sequence`}});export{t};

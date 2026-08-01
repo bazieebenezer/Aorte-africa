@@ -43,3 +43,7 @@ next-env.d.ts
 
 # local screenshots
 /screenshots/
+
+# sanity studio build artifacts
+/dist/
+/.sanity/

@@ -1,1 +1,0 @@
-import{P as e}from"./dist-CUW_baVp.js";var t=`variants`,n={locale:`en-US`,namespace:t,resources:()=>e(()=>import(`./resources-BfdRqhdp-CFoSvV7i.js`),[])};export{n,t};
