@@ -81,7 +81,7 @@ export function Navbar({ onContact }: { onContact: () => void }) {
           className={cn(
             "relative z-[70] flex size-10 items-center justify-center rounded-md border transition-colors lg:hidden",
             open
-              ? "border-primary/60 bg-primary/10 text-primary"
+              ? "border-border bg-foreground/5 text-foreground"
               : "border-border text-muted-foreground hover:text-foreground"
           )}
         >
@@ -96,17 +96,8 @@ export function Navbar({ onContact }: { onContact: () => void }) {
             animate={{ opacity: 1, clipPath: "circle(150% at calc(100% - 48px) 48px)" }}
             exit={{ opacity: 0, clipPath: "circle(0% at calc(100% - 48px) 48px)" }}
             transition={{ duration: 0.7, ease: [0.4, 0, 0.2, 1] }}
-            className="fixed inset-0 z-[60] flex flex-col overflow-hidden bg-background/95 backdrop-blur-2xl lg:hidden"
-            style={{
-              backgroundImage: "url(/img/grid.svg)",
-              backgroundSize: "contain",
-              backgroundRepeat: "repeat",
-            }}
+            className="fixed inset-0 z-[60] flex flex-col overflow-hidden bg-gradient-to-b from-background via-[#101010] to-background lg:hidden"
           >
-            <div
-              aria-hidden
-              className="pointer-events-none absolute -top-24 left-1/2 size-[clamp(300px,60vw,500px)] -translate-x-1/2 rounded-full bg-primary/10 blur-[120px]"
-            />
 
             <nav className="relative z-10 flex flex-1 flex-col items-center justify-center gap-1 px-6">
               {NAV_LINKS.map((link, i) => (
@@ -154,16 +145,6 @@ export function Navbar({ onContact }: { onContact: () => void }) {
                 </Button>
               </motion.div>
             </nav>
-
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.5, delay: 0.9 }}
-              className="relative z-10 pb-10 text-center text-xs text-muted-foreground"
-            >
-              Graduatim, Potens. — Aorte
-            </motion.p>
           </motion.div>
         )}
       </AnimatePresence>
