@@ -13,16 +13,19 @@ import {
 const SERVICES = [
   {
     icon: Globe,
+    tag: "PLATEFORME WEB",
     title: "Développement de plateforme web",
     text: "De la conception d'interfaces vitrines à l'architecture de solutions complexes, nous bâtissons des outils numériques fluides, rapides et sécurisés.",
   },
   {
     icon: PenTool,
+    tag: "AFFICHES PUBLICITAIRES",
     title: "Conception d'affiches publicitaires",
     text: "Maximisez votre impact visuel avec des créations graphiques qui captent l'attention et ancrent votre identité.",
   },
   {
     icon: Clapperboard,
+    tag: "MONTAGE VIDÉO",
     title: "Montage et édition vidéo",
     text: "Transformez vos tournages en récits captivants grâce à un montage maîtrisé, un sound design soigné et un étalonnage professionnel.",
   },
@@ -47,14 +50,17 @@ export function Solves() {
       >
         {SERVICES.map((service) => (
           <motion.div key={service.title} variants={staggerChild} className="min-w-0">
-            <TiltCard className="group h-full rounded-xl border border-border bg-gradient-to-br from-secondary to-background p-6 transition-colors duration-300 hover:border-border-hover">
-              <div className="mb-4 flex size-14 items-center justify-center rounded-full border border-border bg-gradient-to-b from-secondary to-background transition-all duration-300 group-hover:border-primary/40 group-hover:shadow-[0_0_20px_rgba(64,255,35,0.08)]">
-                <service.icon className="size-6 text-foreground transition-colors duration-300 group-hover:text-primary" />
+            <TiltCard className="group flex h-full flex-col rounded-xl border border-border bg-card p-4 pb-6 transition-colors duration-300 hover:border-border-hover">
+              <div className="mb-4 flex h-[200px] w-full items-center justify-center overflow-hidden rounded-lg bg-gradient-to-b from-secondary/40 to-transparent">
+                <service.icon className="size-16 text-foreground transition-transform duration-500 group-hover:scale-110 group-hover:text-primary" />
               </div>
-              <h3 className="text-silver fs-card-title mb-4 font-semibold leading-snug">
+              <span className="mb-2 text-sm font-medium text-primary">
+                {service.tag}
+              </span>
+              <h3 className="text-silver fs-card-title mb-3 font-semibold leading-snug">
                 {service.title}
               </h3>
-              <p className="leading-relaxed text-muted-foreground">
+              <p className="flex-1 leading-relaxed text-muted-foreground">
                 {service.text}
               </p>
             </TiltCard>
