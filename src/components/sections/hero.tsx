@@ -15,7 +15,6 @@ export function Hero() {
   });
 
   const gridY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
-  const glowScale = useTransform(scrollYProgress, [0, 1], [1, 1.6]);
   const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "-40%"]);
   const contentOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
 
@@ -27,13 +26,17 @@ export function Hero() {
     >
       <motion.div
         aria-hidden
-        style={{ y: gridY, backgroundImage: "url(/img/grid.svg)", backgroundSize: "contain", backgroundRepeat: "repeat" }}
+        style={{
+          y: gridY,
+          backgroundImage: "url(/img/grid.svg)",
+          backgroundSize: "contain",
+          backgroundRepeat: "repeat",
+          WebkitMaskImage:
+            "radial-gradient(ellipse 85% 75% at 50% 45%, #000 0%, transparent 78%)",
+          maskImage:
+            "radial-gradient(ellipse 85% 75% at 50% 45%, #000 0%, transparent 78%)",
+        }}
         className="absolute inset-0 z-0"
-      />
-      <motion.div
-        aria-hidden
-        style={{ scale: glowScale }}
-        className="pointer-events-none absolute left-1/2 top-1/2 z-0 size-[clamp(300px,50vw,700px)] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/10 blur-[clamp(120px,20vw,300px)]"
       />
 
       <motion.div
