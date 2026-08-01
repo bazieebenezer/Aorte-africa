@@ -9,8 +9,8 @@
   --card-foreground: #181818;
   --popover: #ffffff;
   --popover-foreground: #181818;
-  --primary: #15803d;
-  --primary-foreground: #ffffff;
+  --primary: #40ff23;
+  --primary-foreground: #0e100f;
   --secondary: #e8e8e8;
   --secondary-foreground: #181818;
   --muted: #f1f1f1;
@@ -22,8 +22,13 @@
   --border: #e5e5e5;
   --border-hover: #c7c7c7;
   --input: #e5e5e5;
-  --ring: #15803d;
+  --ring: #40ff23;
   --radius: 0.625rem;
+}
+
+/* Texte vert sur fond clair : vert sombre lisible (le néon serait illisible) */
+:root:not(.dark) .text-primary {
+  color: #15803d;
 }
 
 .dark {
