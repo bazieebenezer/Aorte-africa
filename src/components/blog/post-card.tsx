@@ -3,23 +3,12 @@ import Link from "next/link";
 import { ArrowRight, CalendarDays, Clock3, UserRound } from "lucide-react";
 import type { Post } from "@/lib/blog-data";
 import { formatDate } from "@/lib/blog-data";
-import { cn } from "@/lib/utils";
 
-export function PostCard({ post, featured = false }: { post: Post; featured?: boolean }) {
+export function PostCard({ post }: { post: Post }) {
   return (
-    <article
-      className={cn(
-        "group overflow-hidden rounded-2xl border border-border bg-card transition-colors duration-200 hover:border-border-hover",
-        featured && "md:grid md:grid-cols-2"
-      )}
-    >
+    <article className="group h-[460px] overflow-hidden rounded-2xl border border-border bg-card transition-colors duration-200 hover:border-border-hover">
       <Link href={`/blog/${post.slug}`} className="flex h-full flex-col">
-        <div
-          className={cn(
-            "relative aspect-video shrink-0 overflow-hidden bg-secondary/60",
-            featured && "md:aspect-auto md:min-h-full"
-          )}
-        >
+        <div className="relative h-48 shrink-0 overflow-hidden bg-secondary/60">
           <Image
             src={post.thumbnail}
             alt={post.title}
@@ -28,19 +17,14 @@ export function PostCard({ post, featured = false }: { post: Post; featured?: bo
           />
         </div>
 
-        <div className={cn("flex flex-1 flex-col gap-3 p-6", featured && "md:justify-center md:p-8")}>
+        <div className="flex flex-1 flex-col gap-3 p-6">
           <div className="flex items-center gap-2">
-            {featured && (
-              <span className="rounded-full border border-primary/30 bg-primary/10 px-3 py-0.5 text-xs font-medium text-primary">
-                À la une
-              </span>
-            )}
             <span className="rounded-full border border-border bg-secondary px-3 py-0.5 text-xs font-medium text-foreground">
               {post.tags[0]}
             </span>
           </div>
 
-          <h3 className="text-silver fs-card-title font-semibold leading-snug">
+          <h3 className="text-silver fs-card-title font-semibold leading-snug line-clamp-2">
             {post.title}
           </h3>
           <p className="line-clamp-2 leading-relaxed text-muted-foreground">

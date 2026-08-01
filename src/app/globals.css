@@ -112,13 +112,6 @@
   }
 }
 
-@media (pointer: fine) {
-  body.cursor-hidden,
-  body.cursor-hidden * {
-    cursor: none !important;
-  }
-}
-
 @layer components {
   .btn-shine {
     position: relative;

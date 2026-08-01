@@ -53,9 +53,6 @@ export function BlogFeed({ posts }: { posts: Post[] }) {
     });
   }, [posts, query, category]);
 
-  const hasFilters = query.trim() !== "" || category !== "Tous";
-  const [featured, ...rest] = filtered;
-
   return (
     <>
       <header className="relative overflow-hidden pt-40 pb-14 text-center sm:pt-48">
@@ -134,33 +131,14 @@ export function BlogFeed({ posts }: { posts: Post[] }) {
       </header>
 
       <div className="mx-auto w-full max-w-6xl px-4 sm:px-6">
-        {!hasFilters && featured && (
-          <Reveal direction="up" className="mt-8">
-            <PostCard post={featured} featured />
-          </Reveal>
-        )}
-
-        {rest.length > 0 && (
+        {filtered.length > 0 && (
           <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {rest.map((post, i) => (
+            {filtered.map((post, i) => (
               <Reveal
                 key={post.slug}
                 direction="up"
                 delay={Math.min(0.1 + i * 0.06, 0.3)}
               >
-                <PostCard post={post} />
-              </Reveal>
-            ))}
-          </div>
-        )}
-
-        {hasFilters && featured && (
-          <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            <Reveal direction="up">
-              <PostCard post={featured} />
-            </Reveal>
-            {rest.map((post, i) => (
-              <Reveal key={post.slug} direction="up" delay={Math.min(0.1 + i * 0.06, 0.3)}>
                 <PostCard post={post} />
               </Reveal>
             ))}
