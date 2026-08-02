@@ -94,7 +94,7 @@ export function Navbar({ onContact }: { onContact: () => void }) {
             animate={{ opacity: 1, clipPath: "circle(150% at calc(100% - 48px) 48px)" }}
             exit={{ opacity: 0, clipPath: "circle(0% at calc(100% - 48px) 48px)" }}
             transition={{ duration: 0.7, ease: [0.4, 0, 0.2, 1] }}
-            className="fixed inset-0 z-[60] flex flex-col overflow-hidden bg-gradient-to-b from-background via-secondary to-background lg:hidden"
+            className="fixed inset-0 z-[60] flex flex-col overflow-hidden bg-background lg:hidden"
           >
 
             <nav className="relative z-10 flex flex-1 flex-col items-center justify-center gap-1 px-6">
