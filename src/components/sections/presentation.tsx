@@ -15,7 +15,7 @@ const BOXES = [
     subtitle: "L'architecture d'un empire",
     text: (
       <>
-        <strong className="font-medium text-primary">Aorte</strong> est né d&apos;une
+        <strong className="font-medium text-primary">Aorte</strong>{" "}est né d&apos;une
         discipline rigoureuse et d&apos;une vision claire : devenir l&apos;artère du
         numérique en Afrique de l&apos;Ouest. Nous construisons une structure fondée sur
         la complémentarité et la résilience.
