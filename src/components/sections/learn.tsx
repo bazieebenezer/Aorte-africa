@@ -15,13 +15,13 @@ const CARDS = [
     tag: "BUREAUTIQUE",
     title: "Dominez vos outils, pas l'inverse.",
     text: "De l'initiation à l'informatique jusqu'aux tableaux croisés dynamiques. Tout ce qu'il faut pour bâtir des fondations solides.",
-    image: "/img/Learn_image.svg",
+    image: "/img/Office.jpg",
   },
   {
     tag: "MONTAGE VIDEO",
     title: "Maîtrisez l'impact visuel et l'émotion.",
     text: "Dominez DaVinci Resolve pour transformer vos rushs en récits cinématographiques. De l'étalonnage des couleurs au mixage sonore dynamique.",
-    image: "/img/Video_image.png",
+    image: "/img/Timeline.jpg",
   },
 ];
 
@@ -48,8 +48,8 @@ export function Learn() {
                 <Image
                   src={card.image}
                   alt={card.tag}
-                  width={320}
-                  height={200}
+                  width={735}
+                  height={490}
                   className="max-h-full w-auto object-contain transition-transform duration-500 group-hover:scale-110"
                 />
               </div>
@@ -87,10 +87,10 @@ export function Learn() {
             </div>
             <div className="relative flex w-full max-w-[420px] flex-1 items-center justify-center">
               <Image
-                src="/img/Group 2028.png"
+                src="/img/Graphic.jpg"
                 alt="Design graphique"
-                width={420}
-                height={260}
+                width={736}
+                height={920}
                 className="h-auto w-full object-contain"
               />
             </div>
