@@ -14,7 +14,6 @@ export function Hero() {
     offset: ["start start", "end start"],
   });
 
-  const gridY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
   const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "-40%"]);
   const contentOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
 
@@ -24,19 +23,18 @@ export function Hero() {
       ref={ref}
       className="relative flex min-h-screen flex-col overflow-hidden"
     >
-      <motion.div
+      <div
         aria-hidden
+        className="theme-grid absolute inset-0 z-0"
         style={{
-          y: gridY,
           backgroundImage: "url(/img/grid.svg)",
           backgroundSize: "contain",
           backgroundRepeat: "repeat",
           WebkitMaskImage:
-            "radial-gradient(ellipse 85% 75% at 50% 45%, #000 0%, transparent 92%)",
+            "radial-gradient(ellipse 140% 120% at 50% 0%, #000 0%, #000 20%, transparent 88%)",
           maskImage:
-            "radial-gradient(ellipse 85% 75% at 50% 45%, #000 0%, transparent 92%)",
+            "radial-gradient(ellipse 140% 120% at 50% 0%, #000 0%, #000 20%, transparent 88%)",
         }}
-        className="theme-grid absolute inset-0 z-0"
       />
 
       <motion.div
