@@ -93,9 +93,9 @@ export function BlogFeed({ posts }: { posts: Post[] }) {
             backgroundSize: "contain",
             backgroundRepeat: "repeat",
             WebkitMaskImage:
-              "radial-gradient(ellipse 140% 120% at 50% 0%, #000 0%, #000 20%, transparent 70%)",
+              "radial-gradient(ellipse 140% 120% at 50% 0%, #000 0%, #000 20%, transparent 88%)",
             maskImage:
-              "radial-gradient(ellipse 140% 120% at 50% 0%, #000 0%, #000 20%, transparent 70%)",
+              "radial-gradient(ellipse 140% 120% at 50% 0%, #000 0%, #000 20%, transparent 88%)",
           }}
         />
         <div className="relative z-10 mx-auto max-w-2xl px-4 sm:px-6">

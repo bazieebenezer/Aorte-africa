@@ -32,9 +32,9 @@ export function Hero() {
           backgroundSize: "contain",
           backgroundRepeat: "repeat",
           WebkitMaskImage:
-            "radial-gradient(ellipse 85% 75% at 50% 45%, #000 0%, transparent 78%)",
+            "radial-gradient(ellipse 85% 75% at 50% 45%, #000 0%, transparent 92%)",
           maskImage:
-            "radial-gradient(ellipse 85% 75% at 50% 45%, #000 0%, transparent 78%)",
+            "radial-gradient(ellipse 85% 75% at 50% 45%, #000 0%, transparent 92%)",
         }}
         className="theme-grid absolute inset-0 z-0"
       />
@@ -47,7 +47,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.2, ease: "backOut" }}
-          className="mb-10 flex items-center gap-2 rounded-full border border-accent/40 bg-accent/5 px-4 py-1.5 text-xs text-accent sm:mb-16"
+          className="mb-10 flex items-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-4 py-1.5 text-xs text-primary dark:border-accent/40 dark:bg-accent/5 dark:text-accent sm:mb-16"
         >
           <BadgeCheck className="size-4" />
           <span>BÂTI SUR LA PASSION</span>
