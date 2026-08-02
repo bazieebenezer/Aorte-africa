@@ -50,7 +50,7 @@ export function Learn() {
                   alt={card.tag}
                   width={735}
                   height={490}
-                  className="max-h-full w-auto object-contain transition-transform duration-500 group-hover:scale-110"
+                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
               </div>
               <span className="mb-2 text-sm font-medium text-primary">
